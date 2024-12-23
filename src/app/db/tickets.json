@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Create Amazon EC2 student free tier event",
     "description": "Free Tier 12 Months Free Amazon EC2 750 Hours only for students!",
-    "assignees": [1],
+    "assignees": [1, 2],
     "task_status": 0,
     "priority": 1,
     "post_status": 1,
@@ -11,7 +11,7 @@
     "estimate": 5,
     "start_date": 1734481935,
     "end_date": 1734481935,
-    "tages": ["campaign"],
+    "tags": ["campaign"],
     "created_time": 1734481935,
     "updated_time": 1734481935
   },
@@ -27,7 +27,7 @@
     "estimate": 2,
     "start_date": 1734481935,
     "end_date": 1734481935,
-    "tages": ["website"],
+    "tags": ["website"],
     "created_time": 1734481935,
     "updated_time": 1734481935
   },
@@ -43,7 +43,7 @@
     "estimate": 3,
     "start_date": 1734481935,
     "end_date": 1734481935,
-    "tages": ["website"],
+    "tags": ["website"],
     "created_time": 1734481935,
     "updated_time": 1734481935
   },
@@ -51,7 +51,7 @@
     "id": 4,
     "title": "Create holidays discount event",
     "description": "Discount event within Christmas",
-    "assignees": [1],
+    "assignees": [1, 2],
     "task_status": 0,
     "priority": 2,
     "post_status": 0,
@@ -59,7 +59,7 @@
     "estimate": 5,
     "start_date": 1734481935,
     "end_date": 1734481935,
-    "tages": ["campaign"],
+    "tags": ["campaign"],
     "created_time": 1734481935,
     "updated_time": 1734481935
   },
@@ -75,7 +75,7 @@
     "estimate": 3,
     "start_date": 1734481935,
     "end_date": 1734481935,
-    "tages": ["website"],
+    "tags": ["website"],
     "created_time": 1734481935,
     "updated_time": 1734481935
   },
@@ -83,7 +83,7 @@
     "id": 6,
     "title": "Define next quarter stategy",
     "description": "Discuss next quarter stategy with PM team",
-    "assignees": [1],
+    "assignees": [2],
     "task_status": 1,
     "priority": 1,
     "post_status": 1,
@@ -91,7 +91,7 @@
     "estimate": 1,
     "start_date": 1734481935,
     "end_date": 1734481935,
-    "tages": ["research"],
+    "tags": ["research"],
     "created_time": 1734481935,
     "updated_time": 1734481935
   }
