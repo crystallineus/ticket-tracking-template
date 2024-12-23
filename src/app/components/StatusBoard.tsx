@@ -1,162 +1,68 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
-import {
-  Card,
-  Button,
-  Avatar,
-  Chip,
-  AvatarGroup,
-  CardHeader,
-  CardBody,
-  CardFooter,
-} from "@nextui-org/react";
-import {
-  CheckCircleIcon,
-  PencilSquareIcon,
-  PlusIcon,
-  StopCircleIcon,
-} from "@heroicons/react/24/outline";
+import { useState, useEffect } from "react";
 import tickets from "../db/tickets.json";
-import { Comment, StatusHistory, Ticket } from "../interfaces";
-import TicketDrawer from "./TicketDrawer";
+import { Ticket } from "../interfaces";
+import TicketColumn from "./TicketColumn";
 
 const statuses = ["Todo", "In Progress", "Done"];
 
 export default function StatusBoard() {
-  const [openTicketID, setOpenTicketID] = useState<number | undefined>();
+  const isMobile = useMobileBreakpoint();
 
-  const handleOpenDrawer = (ticket: Ticket) => {
-    setOpenTicketID(ticket.id);
-  };
-
-  const handleCloseDrawer = () => {
-    setOpenTicketID(undefined);
-  };
-
-  const groupedTasks = statuses.map((status, index) => ({
-    status,
-    tasks: tickets.filter((ticket) => ticket.task_status === index),
-  }));
+  if (isMobile) {
+    return (
+      <div className="gap-4 h-full">
+        <TicketColumn
+          key={1}
+          group={"In Progress"}
+          tasks={tickets.filter((ticket: Ticket) => ticket.task_status === 1)}
+        />
+        <TicketColumn
+          key={0}
+          group={"Todo"}
+          tasks={tickets.filter((ticket: Ticket) => ticket.task_status === 0)}
+        />
+        <TicketColumn
+          key={2}
+          group={"Done"}
+          tasks={tickets.filter((ticket: Ticket) => ticket.task_status === 2)}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex gap-4 h-full">
-      {groupedTasks.map((group, index) => (
-        <div
-          key={index}
-          className="flex-1 flex flex-col rounded-lg shadow-lg p-6"
-        >
-          <div className="flex items-center justify-between">
-            <Chip
-              className="text-lg font-bold mb-4"
-              color={
-                group.status === "Todo"
-                  ? "success"
-                  : group.status === "In Progress"
-                  ? "warning"
-                  : "secondary"
-              }
-              variant="dot"
-            >
-              <p className="text-sm">{group.status} - 2</p>
-            </Chip>
-
-            <Button
-              isIconOnly
-              aria-label="more than 99 notifications"
-              radius="full"
-              variant="light"
-            >
-              <PlusIcon className="h-5 w-5" />
-            </Button>
-          </div>
-
-          <div className="flex-1 space-y-4">
-            {group.tasks
-              .filter((task) => task.post_status !== 2)
-              .map((task) => {
-                return (
-                  <Fragment key={task.id}>
-                    <Card
-                      className="rounded-lg w-full"
-                      isPressable
-                      onPress={() => {
-                        handleOpenDrawer(task);
-                      }}
-                    >
-                      <CardHeader className="justify-between">
-                        <div className="flex gap-5">
-                          <div className="flex flex-col gap-1 items-start justify-center">
-                            <h5 className="text-small tracking-tight text-default-400">
-                              # {task.id}
-                            </h5>
-                            <h4 className="text-small font-semibold leading-none text-default-600">
-                              {task.title}
-                            </h4>
-                          </div>
-                        </div>
-
-                        <AvatarGroup isBordered>
-                          {task.assignees.map((assignee) => (
-                            <Avatar
-                              key={assignee}
-                              src={`https://i.pravatar.cc/150?u=a${assignee}`}
-                            />
-                          ))}
-                        </AvatarGroup>
-                      </CardHeader>
-                      <CardBody className="px-3 py-0 text-small text-default-400">
-                        {task.tags.map((tag) => (
-                          <Chip
-                            key={tag}
-                            color={
-                              tag === "research"
-                                ? "success"
-                                : tag === "campaign"
-                                ? "danger"
-                                : tag === "website"
-                                ? "primary"
-                                : "default"
-                            }
-                            variant="flat"
-                          >
-                            {tag}
-                          </Chip>
-                        ))}
-                      </CardBody>
-                      <CardFooter className="gap-3 items-center justify-between">
-                        <Chip color="default" variant="bordered">
-                          <p className="text-sm">P{task.priority}</p>
-                        </Chip>
-
-                        {task.post_status === 0 && (
-                          <PencilSquareIcon className="h-6 w-6 text-default-400" />
-                        )}
-                        {task.post_status === 1 && (
-                          <StopCircleIcon className="h-6 w-6 text-warning" />
-                        )}
-                        {task.post_status === 3 && (
-                          <CheckCircleIcon className="h-6 w-6 text-secondary" />
-                        )}
-                      </CardFooter>
-                    </Card>
-                    <TicketDrawer
-                      ticket={task}
-                      isOpen={openTicketID === task.id}
-                      onClose={handleCloseDrawer}
-                    />
-                  </Fragment>
-                );
-              })}
-          </div>
-
-          <div className="mt-auto pt-4">
-            <Button className="w-full" variant="light">
-              <PlusIcon className="h-4 w-4" /> Add Task
-            </Button>
-          </div>
-        </div>
-      ))}
+      <TicketColumn
+        key={0}
+        group={"Todo"}
+        tasks={tickets.filter((ticket: Ticket) => ticket.task_status === 0)}
+        scroll={true}
+      />
+      <TicketColumn
+        key={1}
+        group={"In Progress"}
+        tasks={tickets.filter((ticket: Ticket) => ticket.task_status === 1)}
+        scroll={true}
+      />
+      <TicketColumn
+        key={2}
+        group={"Done"}
+        tasks={tickets.filter((ticket: Ticket) => ticket.task_status === 2)}
+        scroll={true}
+      />
     </div>
   );
+}
+
+function useMobileBreakpoint() {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
+  return width < 640;
 }
