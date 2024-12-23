@@ -7,7 +7,7 @@ import {
   CakeIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Link } from "@nextui-org/react";
+import { Divider, Link } from "@nextui-org/react";
 
 const SidebarMenu = [
   {
@@ -26,6 +26,9 @@ const SidebarMenu = [
     icon: <FlagIcon className="h-6 w-6" />,
   },
   { label: "Due today", href: "#", icon: <ClockIcon className="h-6 w-6" /> },
+];
+
+const TagMenu = [
   { label: "Research", href: "#", icon: <ChartBarIcon className="h-6 w-6" /> },
   { label: "Campaign", href: "#", icon: <CakeIcon className="h-6 w-6" /> },
   { label: "Website", href: "#", icon: <GlobeAltIcon className="h-6 w-6" /> },
@@ -54,6 +57,17 @@ export default function Sidebar() {
       </div>
       <nav className="flex-1 p-4">
         {SidebarMenu.map((item, index) => (
+          <Link
+            key={index}
+            href={item.href}
+            className="flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition"
+          >
+            {item.icon}
+            <span>{item.label}</span>
+          </Link>
+        ))}
+        <Divider className="my-3" />
+        {TagMenu.map((item, index) => (
           <Link
             key={index}
             href={item.href}
