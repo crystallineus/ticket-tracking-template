@@ -1,12 +1,6 @@
-import { useState, useEffect } from "react";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 export function useMobileBreakpoint() {
-  const [width, setWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
-
-  return width < 800;
+  const size = useWindowSize();
+  return size?.width === null ? false : size.width < 800;
 }
