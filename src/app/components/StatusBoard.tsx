@@ -3,7 +3,6 @@
 import tickets from "../db/tickets.json";
 import { Ticket } from "../interfaces";
 import TicketColumn from "./TicketColumn";
-import { useMobileBreakpoint } from "../hooks";
 
 type StatusBoardProps = {
   isMobile?: boolean;
