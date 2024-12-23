@@ -6,8 +6,10 @@ import {
   ChartBarIcon,
   CakeIcon,
   GlobeAltIcon,
+  Cog8ToothIcon,
 } from "@heroicons/react/24/outline";
-import { Divider, Link } from "@nextui-org/react";
+import { Button, Divider, Link } from "@nextui-org/react";
+import { Logo } from "./Logo";
 
 const SidebarMenu = [
   {
@@ -34,25 +36,20 @@ const TagMenu = [
   { label: "Website", href: "#", icon: <GlobeAltIcon className="h-6 w-6" /> },
 ];
 
-export const DonezoLogo = () => {
-  return (
-    <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-      <path
-        clipRule="evenodd"
-        d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-  );
+type SidebarProps = {
+  isMobile?: boolean;
 };
 
-export default function Sidebar() {
+export default function Sidebar({ isMobile }: SidebarProps) {
   return (
-    <aside className="fixed inset-y-0 left-0 w-56 text-white flex flex-col shadow-lg border-r border-gray-800">
+    <aside
+      className={
+        "inset-y-0 left-0 w-56 text-white flex flex-col shadow-lg" +
+          !isMobile && " border-r border-gray-800"
+      }
+    >
       <div className="flex items-center justify-center h-16">
-        {/* <h1 className="text-lg font-bold"></h1> */}
-        <DonezoLogo />
+        <Logo />
         <p className="hidden sm:block font-bold text-inherit">Donezo</p>
       </div>
       <nav className="flex-1 p-4">
@@ -78,6 +75,17 @@ export default function Sidebar() {
           </Link>
         ))}
       </nav>
+
+      <div className="flex p-4">
+        <Button
+          isIconOnly
+          aria-label="more than 99 notifications"
+          radius="full"
+          variant="light"
+        >
+          <Cog8ToothIcon className="h-6 w-6" />
+        </Button>
+      </div>
     </aside>
   );
 }

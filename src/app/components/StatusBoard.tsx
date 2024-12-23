@@ -1,11 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import tickets from "../db/tickets.json";
 import { Ticket } from "../interfaces";
 import TicketColumn from "./TicketColumn";
-
-const statuses = ["Todo", "In Progress", "Done"];
+import { useMobileBreakpoint } from "../hooks";
 
 export default function StatusBoard() {
   const isMobile = useMobileBreakpoint();
@@ -54,15 +52,4 @@ export default function StatusBoard() {
       />
     </div>
   );
-}
-
-function useMobileBreakpoint() {
-  const [width, setWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
-
-  return width < 640;
 }

@@ -11,7 +11,15 @@ import {
   Avatar,
   Badge,
   Button,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Link,
 } from "@nextui-org/react";
+
+import { useState } from "react";
+import { Logo } from "./Logo";
+import { Bars2Icon } from "@heroicons/react/24/outline";
 
 interface SearchIconProps extends React.SVGProps<SVGSVGElement> {
   size?: number;
@@ -83,10 +91,29 @@ export const NotificationIcon: React.FC<NotificationIconProps> = ({
   );
 };
 
-export default function CustomizeNavbar() {
+interface CustomizeNavbarProps {
+  isMobile?: boolean;
+  handleOpen?: () => void;
+}
+
+export default function CustomizeNavbar({
+  isMobile,
+  handleOpen,
+}: CustomizeNavbarProps) {
   return (
     <Navbar maxWidth="full">
-      <NavbarContent as="div" className="items-center" justify="start">
+      <NavbarContent>
+        {!isMobile || (
+          <Button
+            isIconOnly
+            aria-label="more than 99 notifications"
+            radius="full"
+            variant="light"
+            onPress={handleOpen}
+          >
+            <Bars2Icon className="h-6" />
+          </Button>
+        )}
         <Input
           classNames={{
             base: "max-w-full sm:max-w-[20rem] h-10",
