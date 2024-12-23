@@ -3,7 +3,7 @@ import CustomizeNavbar from "./components/CustomizeNavbar";
 import Sidebar from "./components/Sidebar";
 import StatusBoard from "./components/StatusBoard";
 import React, { useState } from "react";
-import { Drawer, DrawerContent, useDisclosure } from "@nextui-org/react";
+import { Drawer, DrawerContent } from "@nextui-org/react";
 import { useMobileBreakpoint } from "./hooks";
 
 export default function Home() {

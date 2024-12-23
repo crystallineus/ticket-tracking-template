@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Tabs,
   Tab,
@@ -28,7 +28,7 @@ import {
 import { PencilSquareIcon, SignalIcon } from "@heroicons/react/24/outline";
 import { StopCircleIcon } from "@heroicons/react/24/outline";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
-import { Comment, StatusHistory, Ticket } from "../interfaces";
+import { Comment, Ticket } from "../interfaces";
 import ticketsStatusHistory from "../db/ticket-status-history.json";
 import ticketsComments from "../db/comments.json";
 
@@ -58,7 +58,7 @@ export default function TicketDrawer({
     <div>
       <Drawer isOpen={isOpen} size="2xl" onClose={onClose}>
         <DrawerContent>
-          {(onClose) => (
+          {() => (
             <>
               <DrawerHeader className="flex items-center gap-1">
                 {ticket.post_status === 0 && (

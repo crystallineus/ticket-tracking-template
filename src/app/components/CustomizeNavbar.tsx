@@ -1,8 +1,6 @@
 import {
   Navbar,
-  NavbarBrand,
   NavbarContent,
-  NavbarItem,
   Input,
   DropdownItem,
   DropdownTrigger,
@@ -11,14 +9,8 @@ import {
   Avatar,
   Badge,
   Button,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Link,
 } from "@nextui-org/react";
 
-import { useState } from "react";
-import { Logo } from "./Logo";
 import { Bars2Icon } from "@heroicons/react/24/outline";
 
 interface SearchIconProps extends React.SVGProps<SVGSVGElement> {
