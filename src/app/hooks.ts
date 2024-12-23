@@ -1,6 +1,12 @@
+"use client";
+
 import { useWindowSize } from "@uidotdev/usehooks";
 
 export function useMobileBreakpoint() {
   const size = useWindowSize();
-  return size?.width === null ? false : size.width < 800;
+  if (size.width === null) {
+    return "pending";
+  }
+
+  return size.width < 800;
 }

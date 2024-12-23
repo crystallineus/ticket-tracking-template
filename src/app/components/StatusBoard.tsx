@@ -5,9 +5,11 @@ import { Ticket } from "../interfaces";
 import TicketColumn from "./TicketColumn";
 import { useMobileBreakpoint } from "../hooks";
 
-export default function StatusBoard() {
-  const isMobile = useMobileBreakpoint();
+type StatusBoardProps = {
+  isMobile?: boolean;
+};
 
+export default function StatusBoard({ isMobile }: StatusBoardProps) {
   if (isMobile) {
     return (
       <div className="gap-4 h-full">
